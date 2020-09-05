@@ -1,0 +1,32 @@
+<h1>Welcome, <%=current_user%> to Fwitter</h1>
+
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
+
+<% if logged_in? %>
+<h3>Tweets</h3>
+<% @tweets.each do |tweet| %>
+  <tr>
+    <td><%=tweet.id%></td>
+    <td><%=tweet.user.username%></td>
+    <td><%=tweet.content%></td>
+    <td><a href="/tweets/<%=tweet.id%>">View</a></td>
+  </tr>
+  <% end %>
+
+  <br>
+
+<form action="/tweets/new" method="get">
+  <input type="submit" name="" value="New Tweet">
+</form>
+
+<br>
+
+<form action="/logout" method="get">
+  <input type="submit" name="" value="Log Out">
+</form>
+
+<% else %>
+<h3>Please <a href="/signup">Sign Up</a> or <a href="/login">Log In</a> to continue.</h3>
+<%end%>

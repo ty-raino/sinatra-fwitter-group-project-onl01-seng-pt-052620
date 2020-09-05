@@ -1,0 +1,35 @@
+<% if flash.has?(:message) %>
+<%= flash[:message]  %>
+<% end %>
+
+<% if session[:user_id] == @tweet.user_id %>
+<h3>My Tweet</h3>
+<%else%>
+<h3><%=@tweet.user.username%>'s Tweet</h3>
+<% end %>
+
+<p><%=@tweet.content%></p>
+
+<!-- Edit Tweet -->
+<form action="/tweets/<%=@tweet.id%>/edit" method="get">
+  <input type="submit" id="edit" value="Edit Tweet">
+</form>
+
+<br><br>
+<!-- Delete Tweet -->
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method " value="delete">
+  <input type="submit" id="delete" name="" value="Delete Tweet">
+</form>
+
+<br><br>
+
+<!-- View All Tweets -->
+<form action="/tweets" method="get">
+  <input type="submit" name="" value="View All Tweets">
+</form>
+
+<!-- Log Out -->
+<form action="/logout" method="get">
+  <input type="submit" id="logout" name="" value="Log Out">
+</form>
